@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Search</title>
+    <link rel="stylesheet" href="js/lib/semantic-ui/build/packaged/css/semantic.css"/>
+</head>
+<body ng-app="products">
+
+<div class="ui two column grid" ng-controller="ProductsFilterCtrl">
+
+    <div class="column">
+        <div class="ui form segment">
+
+            <label><h2>Filters</h2></label>
+
+            <div class="ui form segment">
+                <label><h3>Brands:</h3></label>
+                <ul>
+                    <li ng-repeat="brand in brands">
+                        <div class="ui checkbox">
+                            <input type="checkbox" id="{{brand}}" ng-model="brandsFilter[brand]">
+                            <label for="{{brand}}">{{brand}}</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ui form segment">
+                <label><h3>Price:</h3></label>
+                <div class="ui mini icon input">
+                    <input type="text" placeholder="From">
+                    <i class="search icon"></i>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui mini icon input">
+                    <input type="text" placeholder="To">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+
+            <button class="ui blue button" ng-click="filter()">Search</button>
+
+        </div>
+    </div>
+
+    <div class="column">
+
+        <table class="ui table segment">
+            <thead>
+            <tr><th>Title</th>
+                <th>Price</th>
+                <th>Brand</th>
+                <th>Resolution</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in products | brandsFilter:filterParams">
+                <td>{{item.title}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.brand}}</td>
+                <td>{{item.resolution}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script src="js/lib/angular/angular.js"></script>
+<script src="js/products.js"></script>
+<script src="js/filters/brands-filter.js"></script>
+
+</body>
+</html>
