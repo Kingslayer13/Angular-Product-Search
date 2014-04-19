@@ -1,0 +1,27 @@
+{
+  "name": "Angular-Product-Search",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Kingslayer13/Angular-Product-Search",
+  "authors": [
+    "Kingslayer <13kingslayer13@gmail.com>"
+  ],
+  "main": "app.js",
+  "keywords": [
+    "angular",
+    "filter"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16",
+    "jquery-ui": "~1.10.4",
+    "semantic-ui": "~0.15.5"
+  }
+}
