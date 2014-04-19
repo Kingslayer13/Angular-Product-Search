@@ -15,6 +15,28 @@ app.get('/products', function(request, response){
     });
 });
 
+app.post('/products', function(request, response){
+    fs.readFile('data.json', function (err, data) {
+        if (err){
+            throw err;
+        }
+        else {
+            var jsonObj = JSON.parse(data),
+                newProduct = {
+                    title: request.query.title,
+                    price: request.query.price,
+                    brand: request.query.brand,
+                    resolution: request.query.resolution
+                };
+            jsonObj[jsonObj.length] = newProduct;
+            fs.writeFile('data.json', JSON.stringify(jsonObj), function(err){
+                if (err) throw err;
+                else response.send(true);
+            });
+        }
+    });
+});
+
 app.delete('/products', function(request, response){
     fs.readFile('data.json', function (err, data) {
         if (err){

@@ -1,5 +1,5 @@
 angular.module('products', [])
-    .controller('ProductsFilterCtrl', function($scope, $http){
+    .controller('ProductsFilterCtrl', function($scope, $http, Product){
         var products = $scope.products = [],
             brandParamsForFilter =  $scope.brandParamsForFilter = {},
             priceParamForFilter = $scope.priceParamForFilter = {},
@@ -42,6 +42,8 @@ angular.module('products', [])
 
         $scope.brands = ['GoPro', 'DOD', 'Aspiring', 'Globex', 'Falcon'];
 
+        $scope.newProduct = new Product();
+
         $scope.remove = function(item){
             $http({
                 method: 'DELETE',
@@ -53,7 +55,26 @@ angular.module('products', [])
                     'Accept': 'application/json'
                 }
             }).success(function(data){
+                    if(data) refreshProducts();
+                });
+        };
+
+        $scope.add = function(newItem){
+            $http({
+                method: 'POST',
+                url: '/products',
+                params: {
+                    title: newItem.title,
+                    price: newItem.price,
+                    brand: newItem.brand,
+                    resolution: newItem.resolution
+                },
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).success(function(data){
                 if(data) refreshProducts();
+                    $scope.newProduct = new Product();
             });
         };
 

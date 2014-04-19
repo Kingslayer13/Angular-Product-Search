@@ -75,6 +75,36 @@
             </tbody>
         </table>
 
+        <form class="ui form segment"  ng-submit="add(newProduct)">
+            <label><h2>Add new product</h2></label>
+            <br/>
+            <div class="field">
+                <label><h3>Title:</h3></label>
+                <div class="ui input">
+                    <input type="text" placeholder="Title" ng-model="newProduct.title">
+                </div>
+            </div>
+            <div class="field">
+                <label><h3>Price:</h3></label>
+                <div class="ui input">
+                    <input type="number" placeholder="Price" ng-model="newProduct.price">
+                </div>
+            </div>
+            <div class="field">
+                <label><h3>Brand:</h3></label>
+                <div class="ui input">
+                    <input type="text" placeholder="Brand" ng-model="newProduct.brand">
+                </div>
+            </div>
+            <div class="field">
+                <label><h3>Matrix resolution:</h3></label>
+                <div class="ui input">
+                    <input type="number" placeholder="Resolution" ng-model="newProduct.resolution">
+                </div>
+            </div>
+            <button class="ui blue submit button">Add</button>
+        </form>
+
     </div>
 
 </div>
@@ -84,6 +114,7 @@
 <script src="js/filters/brands-filter.js"></script>
 <script src="js/filters/price-filter.js"></script>
 <script src="js/filters/matrix-filter.js"></script>
+<script src="js/classes/product.js"></script>
 <script src="js/directives/slider.js"></script>
 <script src="js/lib/jquery/dist/jquery.js"></script>
 <script src="js/lib/jquery-ui/ui/jquery-ui.js"></script>
