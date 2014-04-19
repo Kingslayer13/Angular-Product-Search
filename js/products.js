@@ -4,6 +4,7 @@ angular.module('products', [])
             brandParamsForFilter =  $scope.brandParamsForFilter = {},
             priceParamForFilter = $scope.priceParamForFilter = {},
             matrixParamForFilter = $scope.matrixParamForFilter = {},
+            brands = $scope.brands = ['GoPro', 'DOD', 'Aspiring', 'Globex', 'Falcon'],
             brandsFilter = $scope.brandsFilter = {
                 'GoPro': true,
                 'DOD': true,
@@ -40,7 +41,7 @@ angular.module('products', [])
                 matrixParamForFilter.max = matrix.max;
             };
 
-        $scope.brands = ['GoPro', 'DOD', 'Aspiring', 'Globex', 'Falcon'];
+
 
         $scope.newProduct = new Product();
 
@@ -73,8 +74,10 @@ angular.module('products', [])
                     'Accept': 'application/json'
                 }
             }).success(function(data){
-                if(data) refreshProducts();
+                if(data){
+                    refreshProducts();
                     $scope.newProduct = new Product();
+                }
             });
         };
 
