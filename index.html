@@ -3,13 +3,14 @@
 <head>
     <title>Product Search</title>
     <link rel="stylesheet" href="js/lib/semantic-ui/build/packaged/css/semantic.css"/>
+    <link rel="stylesheet" href="js/lib/jquery-ui/themes/ui-lightness/jquery-ui.css"/>
 </head>
 <body ng-app="products">
 
 <div class="ui two column grid" ng-controller="ProductsFilterCtrl">
 
     <div class="column">
-        <div class="ui form segment">
+        <form class="ui form segment" ng-submit="filterProducts(brandsFilter, pricesFilter, matrixFilter)">
 
             <label><h2>Filters</h2></label>
 
@@ -28,19 +29,28 @@
             <div class="ui form segment">
                 <label><h3>Price:</h3></label>
                 <div class="ui mini icon input">
-                    <input type="text" placeholder="From">
+                    <input type="number" placeholder="From" ng-model="pricesFilter.min">
                     <i class="search icon"></i>
                 </div>
                 <div class="ui divider"></div>
                 <div class="ui mini icon input">
-                    <input type="text" placeholder="To">
+                    <input type="number" placeholder="To" ng-model="pricesFilter.max">
                     <i class="search icon"></i>
                 </div>
             </div>
 
-            <button class="ui blue button" ng-click="filter()">Search</button>
+            <div class="ui form segment">
+                <label><h3>Matrix resolution:</h3></label>
+                <p>
+                    <label>Min: {{matrixFilter.min}}</label>
+                    <label>Max: {{matrixFilter.max}}</label>
+                </p>
+                <p><div class="slider"></div></p>
+            </div>
 
-        </div>
+            <button class="ui blue button">Search</button>
+
+        </form>
     </div>
 
     <div class="column">
@@ -54,7 +64,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in products | brandsFilter:filterParams">
+            <tr ng-repeat="item in products | brandsFilter:brandParamsForFilter | priceFilter:priceParamForFilter | matrixFilter:matrixParamForFilter">
                 <td>{{item.title}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.brand}}</td>
@@ -70,6 +80,11 @@
 <script src="js/lib/angular/angular.js"></script>
 <script src="js/products.js"></script>
 <script src="js/filters/brands-filter.js"></script>
+<script src="js/filters/price-filter.js"></script>
+<script src="js/filters/matrix-filter.js"></script>
+<script src="js/directives/slider.js"></script>
+<script src="js/lib/jquery/dist/jquery.js"></script>
+<script src="js/lib/jquery-ui/ui/jquery-ui.js"></script>
 
 </body>
 </html>
