@@ -61,6 +61,7 @@
                 <th>Price</th>
                 <th>Brand</th>
                 <th>Resolution</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
@@ -69,6 +70,7 @@
                 <td>{{item.price}}</td>
                 <td>{{item.brand}}</td>
                 <td>{{item.resolution}}</td>
+                <th><a href="#" ng-click="remove(item)">Delete</a></th>
             </tr>
             </tbody>
         </table>

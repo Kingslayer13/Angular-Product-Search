@@ -19,6 +19,14 @@ angular.module('products', [])
                 min: 2,
                 max: 20
             },
+            refreshProducts = function(){
+                $http.get("/products").success(function(data){
+                    products = $scope.products = [];
+                    data.forEach(function(item){
+                        products.push(item);
+                    })
+                });
+            },
             filterProducts = $scope.filterProducts = function(brands, prices, matrix){
                 for(var brand in brands){
                     if(brands.hasOwnProperty(brand)){
@@ -34,12 +42,22 @@ angular.module('products', [])
 
         $scope.brands = ['GoPro', 'DOD', 'Aspiring', 'Globex', 'Falcon'];
 
-        $http.get("/products").success(function(data){
-            data.forEach(function(item){
-                products.push(item);
-            })
-        });
+        $scope.remove = function(item){
+            $http({
+                method: 'DELETE',
+                url: '/products',
+                params: {
+                    index: products.indexOf(item)
+                },
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).success(function(data){
+                if(data) refreshProducts();
+            });
+        };
 
+        refreshProducts();
         filterProducts(brandsFilter, pricesFilter, matrixFilter);
     })
 ;
